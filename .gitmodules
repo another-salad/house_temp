@@ -1,0 +1,6 @@
+[submodule "temp_sense_pi"]
+	path = temp_sense_pi
+	url = https://github.com/jumbobumbo/temp_sense_pi.git
+[submodule "flask_mysql_db"]
+	path = flask_mysql_db
+	url = https://github.com/jumbobumbo/flask-db.git
