@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+    dev_scheduler_py39:
+        build: .
+        container_name: dev_scheduler
+        volumes:
+            - ./app:/app
+        environment:
+            TZ: "Europe/London"
+        command: tail -F anything  # keeps the container running
