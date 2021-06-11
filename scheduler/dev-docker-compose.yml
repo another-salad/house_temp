@@ -9,3 +9,12 @@ services:
         environment:
             TZ: "Europe/London"
         command: tail -F anything  # keeps the container running
+        secrets:
+            - un
+            - pw
+
+secrets:
+    un:
+        file: ./secrets/un
+    pw:
+        file: ./secrets/pw
