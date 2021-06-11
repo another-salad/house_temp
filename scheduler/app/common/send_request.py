@@ -22,7 +22,7 @@ class Requester:
             args (dict, optional): The args to send with the request (json serializable). Defaults to None.
 
         Returns:
-            tuple: response, http error code
+            tuple: error (bool), return_vals (dict, string, exception)
         """
         error = False
         return_vals = None
