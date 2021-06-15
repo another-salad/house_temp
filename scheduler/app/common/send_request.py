@@ -1,6 +1,4 @@
-
 import requests
-
 from json import loads
 
 from common.enums import HTTPErrorCodes
