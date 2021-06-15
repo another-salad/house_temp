@@ -12,5 +12,5 @@ def get_conf(json_file="conf"):
         object: A python object
     """
     full_path = Path(__file__).parent.absolute()
-    with open(Path(full_path, "config", json_file + ".json"), "r") as conf:
-        return load(conf, object_hook=lambda d: namedtuple('config', d.keys())(*d.values()))
+    with open(Path(full_path, "config", f"{json_file}.json"), "r") as conf:
+        return load(conf, object_hook=lambda d: namedtuple("hosts", d.keys())(*d.values()))
