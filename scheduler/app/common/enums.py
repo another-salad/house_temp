@@ -1,6 +1,11 @@
 from enum import IntEnum
 
 
+class RequestTypes(IntEnum):
+    GET = 0
+    POST = 1
+
+
 class HTTPErrorCodes(IntEnum):
     OK = 200
     BAD_REQUEST = 400

@@ -1,15 +1,17 @@
 import requests
 from json import loads
 
+from common import UN, PW
 from common.conf_read import get_conf
-from common.enums import HTTPErrorCodes
+from common.enums import HTTPErrorCodes, RequestTypes
 from common.exceptions import InvalidParameterError
+from common.secret_read import get_secret
 
 
 class Requester:
 
     headers = {"Accept": "application/json", "Content-Type": "application/json"}
-    http_methods = {0: "get", 1: "post"}
+    http_methods = {RequestTypes.GET: "get", RequestTypes.POST: "post"}
     hosts = None
 
     @property
@@ -62,11 +64,23 @@ class DBRequester(Requester):
     call = "call"
     auth = "auth"
     token = None
+    username = None
+    password = None
 
     def __init__(self) -> None:
         super().__init__()
 
     @property
+    def username(self):
+        """The DB username"""
+        return get_secret(file_name=UN)
+
+    @property
+    def password(self):
+        """The DB password"""
+        return get_secret(file_name=PW)
+
+    @property
     def token(self):
         """The JWT token for the DB connection"""
-        self.request(method=1, uri=self.hosts.db)  #TODO: after secrets
+        return self.request(method=RequestTypes.POST, uri=f"{self.hosts.db}/{self.auth}", args={"username": self.username, "password": self.password})
