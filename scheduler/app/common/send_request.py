@@ -1,6 +1,7 @@
 import requests
 from json import loads
 
+from common.conf_read import get_conf
 from common.enums import HTTPErrorCodes
 from common.exceptions import InvalidParameterError
 
@@ -9,6 +10,12 @@ class Requester:
 
     headers = {"Accept": "application/json", "Content-Type": "application/json"}
     http_methods = {0: "get", 1: "post"}
+    hosts = None
+
+    @property
+    def hosts(self):
+        """All the host addresses from the config file"""
+        return get_conf()
 
     def request(self, method: int, uri: str, ssl: bool = False, args: dict = None) -> tuple:
         """Sends a GET/POST request to a URI, args optional
@@ -54,6 +61,12 @@ class DBRequester(Requester):
 
     call = "call"
     auth = "auth"
+    token = None
 
     def __init__(self) -> None:
         super().__init__()
+
+    @property
+    def token(self):
+        """The JWT token for the DB connection"""
+        self.request(method=1, uri=self.hosts.db)  #TODO: after secrets
