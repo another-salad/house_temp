@@ -1,14 +1,13 @@
 import requests
 from json import loads
 
-from common import ACCESS_TOKEN_KEY, UN, PW
 from common.conf_read import get_conf
 from common.enums import HTTPErrorCodes, RequestTypes
-from common.exceptions import InvalidParameterError, JWTError
-from common.secret_read import get_secret
+from common.exceptions import InvalidParameterError
 
 
 class Requester:
+    """The base class for handling GET/POST commands"""
 
     headers = {"Accept": "application/json", "Content-Type": "application/json"}
     http_methods = {RequestTypes.GET: "get", RequestTypes.POST: "post"}
@@ -57,35 +56,3 @@ class Requester:
             return_vals = exc
 
         return error, return_vals
-
-
-class DBRequester(Requester):
-
-    call = "call"
-    auth = "auth"
-    token = None
-    username = None
-    password = None
-
-    def __init__(self) -> None:
-        super().__init__()
-        self.headers = self.headers | {"Authorization": f"Bearer {self.token}"}
-
-    @property
-    def username(self):
-        """The DB username"""
-        return get_secret(file_name=UN)
-
-    @property
-    def password(self):
-        """The DB password"""
-        return get_secret(file_name=PW)
-
-    @property
-    def token(self):
-        """The JWT token for the DB connection"""
-        error, resp = self.request(method=RequestTypes.POST, uri=f"{self.hosts.db}/{self.auth}", args={"username": self.username, "password": self.password})
-        if error:
-            raise JWTError(f"Token not returned. Response: {resp}")
-
-        return resp[ACCESS_TOKEN_KEY]
