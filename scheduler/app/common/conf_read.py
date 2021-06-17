@@ -1,3 +1,5 @@
+"""Reads the config json file"""
+
 from collections import namedtuple
 from json import load
 from pathlib import Path

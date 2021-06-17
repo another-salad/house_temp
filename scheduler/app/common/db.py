@@ -1,3 +1,5 @@
+"""The DB object, inherits from Requester"""
+
 
 from common import ACCESS_TOKEN_KEY, UN, PW
 from common.exceptions import JWTError
@@ -11,15 +13,11 @@ class DB(Requester):
 
     call = "call"
     auth = "auth"
-    db_host = None
-    token = None
-    username = None
-    password = None
 
     def __init__(self) -> None:
         super().__init__()
-        self.headers = self.headers | {"Authorization": f"Bearer {self.token}"}
         self.db_host = self.hosts.db
+        self.headers = self.headers | {"Authorization": f"Bearer {self.token}"}
 
     @property
     def username(self):

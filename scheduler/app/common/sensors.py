@@ -1,3 +1,5 @@
+"""All Temp sensor values"""
+
 
 from common import SENSOR_TEMP_KEY, SENSOR_ERROR_KEY, SENSOR_LOCATION_KEY
 from common.enums import RequestTypes
@@ -7,8 +9,6 @@ from common.requester import Requester
 
 class Sensors(Requester):
     """All temp sensors, inherits from Requester"""
-
-    temps = None
 
     @property
     def temps(self):

@@ -1,3 +1,4 @@
+"""All Custom Exceptions"""
 
 
 class InvalidParameterError(BaseException):

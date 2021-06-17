@@ -1,5 +1,8 @@
-import requests
+"""Base class for handling GET/POST commands"""
+
 from json import loads
+
+import requests
 
 from common.conf_read import get_conf
 from common.enums import HTTPErrorCodes, RequestTypes
@@ -11,7 +14,6 @@ class Requester:
 
     headers = {"Accept": "application/json", "Content-Type": "application/json"}
     http_methods = {RequestTypes.GET: "get", RequestTypes.POST: "post"}
-    hosts = None
 
     @property
     def hosts(self):

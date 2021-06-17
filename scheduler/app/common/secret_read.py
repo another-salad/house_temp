@@ -1,3 +1,5 @@
+"""Reads the docker secrets"""
+
 from pathlib import Path
 
 
