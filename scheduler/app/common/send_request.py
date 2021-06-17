@@ -1,10 +1,10 @@
 import requests
 from json import loads
 
-from common import UN, PW
+from common import ACCESS_TOKEN_KEY, UN, PW
 from common.conf_read import get_conf
 from common.enums import HTTPErrorCodes, RequestTypes
-from common.exceptions import InvalidParameterError
+from common.exceptions import InvalidParameterError, JWTError
 from common.secret_read import get_secret
 
 
@@ -52,7 +52,7 @@ class Requester:
             else:
                 return_vals = loads(response.content)
 
-        except (requests.exceptions.MissingSchema, requests.exceptions.ConnectionError, requests.exceptions.InvalidURL) as exc:
+        except (requests.exceptions.ConnectionError, requests.exceptions.InvalidURL) as exc:
             error = True
             return_vals = exc
 
@@ -69,6 +69,7 @@ class DBRequester(Requester):
 
     def __init__(self) -> None:
         super().__init__()
+        self.headers = self.headers | {"Authorization": f"Bearer {self.token}"}
 
     @property
     def username(self):
@@ -83,4 +84,8 @@ class DBRequester(Requester):
     @property
     def token(self):
         """The JWT token for the DB connection"""
-        return self.request(method=RequestTypes.POST, uri=f"{self.hosts.db}/{self.auth}", args={"username": self.username, "password": self.password})
+        error, resp = self.request(method=RequestTypes.POST, uri=f"{self.hosts.db}/{self.auth}", args={"username": self.username, "password": self.password})
+        if error:
+            raise JWTError(f"Token not returned. Response: {resp}")
+
+        return resp[ACCESS_TOKEN_KEY]
