@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+    temp_scheduler:
+        build: .
+        container_name: temp_scheduler
+        volumes:
+            - ./app:/app
+        environment:
+            TZ: "Europe/London"
+        command: python /app/app.py
+        secrets:
+            - un
+            - pw
+
+secrets:
+    un:
+        file: ./secrets/un
+    pw:
+        file: ./secrets/pw
