@@ -17,22 +17,22 @@ class DB(Requester):
     def __init__(self) -> None:
         super().__init__()
         self.db_host = self.hosts.db
-        self.headers = self.headers | {"Authorization": f"Bearer {self.token}"}
+        self.headers = self.headers | {"Authorization": f"Bearer {self._token}"}
 
     @property
-    def username(self):
+    def _username(self):
         """The DB username"""
         return get_secret(file_name=UN)
 
     @property
-    def password(self):
+    def _password(self):
         """The DB password"""
         return get_secret(file_name=PW)
 
     @property
-    def token(self):
+    def _token(self):
         """The JWT token for the DB connection"""
-        error, resp = self.request(method=RequestTypes.POST, uri=f"{self.hosts.db}/{self.auth}", args={"username": self.username, "password": self.password})
+        error, resp = self.request(method=RequestTypes.POST, uri=f"{self.db_host}/{self.auth}", args={"username": self._username, "password": self._password})
         if error:
             raise JWTError(f"Token not returned. Response: {resp}")
 
