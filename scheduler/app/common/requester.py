@@ -34,7 +34,7 @@ class Requester:
         """
         error = False
         return_vals = None
-        if method not in self.http_methods.keys():
+        if isinstance(method, bool) or not isinstance(method, int) or method not in self.http_methods.keys():
             raise InvalidParameterError(f"HTTP method key {method} not found. Supported methods: {self.http_methods}")
 
         req = getattr(requests, self.http_methods[method])
@@ -55,6 +55,6 @@ class Requester:
 
         except (requests.exceptions.ConnectionError, requests.exceptions.InvalidURL) as exc:
             error = True
-            return_vals = exc
+            return_vals = str(exc)
 
         return error, return_vals
