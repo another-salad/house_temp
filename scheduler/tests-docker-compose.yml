@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+    test_lint_scheduler:
+        build: .
+        container_name: test_lint_temp_scheduler
+        volumes:
+            - ./app:/app
+        environment:
+            TZ: "Europe/London"
+        working_dir: /app
+        command: python /app/run_tests.py
