@@ -1,5 +1,6 @@
 """Base classes for Requester class tests"""
-#pylint: disable=wrong-import-position, disable=wrong-import-position, disable=unused-argument
+
+#pylint: disable=wrong-import-position, disable=wrong-import-position, disable=unused-argument, disable=too-few-public-methods
 from copy import deepcopy
 from sys import path
 from requests import exceptions
@@ -9,6 +10,7 @@ from tests import BASE_TEST_KWARGS
 path.append("..")
 from common.exceptions import InvalidParameterError
 from common.requester import Requester
+
 
 class _TestCaseRequesterReturnValuesMixin:
     """Mixins for the Requester.request return values"""
@@ -34,6 +36,17 @@ class _TestCaseRequesterReturnValuesMixin:
         """Tests the second return value is a dictionary"""
         actual_result = Requester().request(**self.test_kwargs)[1]
         self.assertIsInstance(actual_result, dict)
+
+
+class _TestCaseReturnValuesHTTPErrorMixin:
+    """Mixins for the equester.request return values when a non HTTP 200 code is returned"""
+
+    test_kwargs = BASE_TEST_KWARGS
+
+    def test_request_return_values(self, mocked_output):
+        """Tests a tuple is returned from requester method"""
+        actual_result = Requester().request(**self.test_kwargs)
+        self.assertEqual(actual_result, tuple([True, "foo"]))
 
 
 class _TestCaseRequesterExceptionsMixin:
