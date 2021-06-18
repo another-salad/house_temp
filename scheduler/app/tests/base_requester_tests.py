@@ -4,6 +4,8 @@ from copy import deepcopy
 from sys import path
 from requests import exceptions
 
+from tests import BASE_TEST_KWARGS
+
 path.append("..")
 from common.exceptions import InvalidParameterError
 from common.requester import Requester
@@ -11,7 +13,7 @@ from common.requester import Requester
 class _TestCaseRequesterReturnValuesMixin:
     """Mixins for the Requester.request return values"""
 
-    test_kwargs = {"uri": "0.0.0.0"}
+    test_kwargs = BASE_TEST_KWARGS
 
     def test_request_return_tuple(self, mocked_output):
         """Tests a tuple is returned from requester method"""
@@ -37,7 +39,7 @@ class _TestCaseRequesterReturnValuesMixin:
 class _TestCaseRequesterExceptionsMixin:
     """Mixins for the Requester.request Exceptions"""
 
-    test_kwargs = {"uri": "0.0.0.0"}
+    test_kwargs = BASE_TEST_KWARGS
 
     def test_requests_connection_error(self, post_mock):
         """Tests that the requests.exceptions.ConnectionError is caught"""
@@ -63,7 +65,7 @@ class _TestCaseRequesterExceptionsMixin:
 class _TestCaseParameterMixin:
     """Mixins for input parameter test cases"""
 
-    test_kwargs = {"uri": "0.0.0.0"}
+    test_kwargs = BASE_TEST_KWARGS
 
     def test_invalid_param_exception_int(self):
         """Tests that an InvalidParameterError is raised when an unknown http method is supplied"""
