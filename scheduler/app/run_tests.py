@@ -5,7 +5,7 @@ from unittest import TestLoader, TextTestRunner
 from pylint.lint import Run
 
 
-def discover_and_run(start_dir: str = "tests/", pattern: str = "test*.py"):
+def discover_and_run(start_dir: str = "tests/", pattern: str = "test_*.py"):
     """Discovers and runs all unit tests from the specified DIR
 
     Args:
