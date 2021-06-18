@@ -17,8 +17,7 @@ def discover_and_run(start_dir: str = "tests/", pattern: str = "test*.py"):
     """
     tests = TestLoader().discover(start_dir, pattern=pattern)
     runner = TextTestRunner(verbosity=2)
-    result = runner.run(tests)
-    return result
+    return runner.run(tests)
 
 
 def print_stages(text: str):
