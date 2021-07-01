@@ -1,0 +1,19 @@
+pipeline {
+    agent {
+        dockerfile {
+            filename 'Dockerfile'
+            dir 'scheduler'
+            label 'unittests_house_temp_scheduler'
+            args '-v /scheduler/app:app'
+        }
+    }
+    stages {
+        stage('test') {
+            steps {
+                dir("scheduler") {
+                    sh 'python /scheduler/run_tests.py'
+                }
+            }
+        }
+    }
+}
