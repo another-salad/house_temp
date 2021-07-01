@@ -3,7 +3,6 @@ pipeline {
         dockerfile {
             filename 'Dockerfile'
             dir 'scheduler'
-            label 'unittests_house_temp_scheduler'
             args '-v /scheduler/app:app'
         }
     }
@@ -11,7 +10,7 @@ pipeline {
         stage('test') {
             steps {
                 dir("scheduler") {
-                    sh 'python /scheduler/run_tests.py'
+                    sh 'python run_tests.py'
                 }
             }
         }
