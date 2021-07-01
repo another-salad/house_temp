@@ -6,7 +6,7 @@ pipeline {
         }
     }
     stages {
-        stage('test') {
+        stage('run tests') {
             steps {
                 dir("scheduler/app") {
                     sh 'python run_tests.py'
