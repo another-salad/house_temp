@@ -1,9 +1,8 @@
 pipeline {
     agent {
         dockerfile {
-            filename 'Dockerfile'
+            filename 'Dockerfile.jenkins'
             dir 'scheduler'
-            args '-v ./scheduler/app:/app'
         }
     }
     stages {
