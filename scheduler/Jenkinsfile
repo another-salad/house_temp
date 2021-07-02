@@ -3,6 +3,7 @@ pipeline {
         dockerfile {
             filename 'Dockerfile.jenkins'
             dir 'scheduler'
+            args '-e PYLINTHOME=.'
         }
     }
     stages {
