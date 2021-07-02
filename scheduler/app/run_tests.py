@@ -32,7 +32,6 @@ def print_stages(text: str):
 
 
 if __name__ == "__main__":
-    print_stages("Running unit tests")
     discover_and_run()
     print_stages('Running pylint')
     Run(["app.py", "common/"])
