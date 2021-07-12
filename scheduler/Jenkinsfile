@@ -1,0 +1,18 @@
+pipeline {
+    agent {
+        dockerfile {
+            filename 'Dockerfile.jenkins'
+            dir 'scheduler'
+            args '-e PYLINTHOME=.'
+        }
+    }
+    stages {
+        stage('run tests') {
+            steps {
+                dir("scheduler/app") {
+                    sh 'python run_tests.py'
+                }
+            }
+        }
+    }
+}
