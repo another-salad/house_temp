@@ -4,3 +4,6 @@
 [submodule "flask_mysql_db"]
 	path = flask_mysql_db
 	url = https://github.com/jumbobumbo/flask-db.git
+[submodule "esp32_temp_sensor"]
+	path = esp32_temp_sensor
+	url = https://github.com/jumbobumbo/esp32_temp_sensor.git
