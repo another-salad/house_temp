@@ -7,3 +7,6 @@
 [submodule "esp32_temp_sensor"]
 	path = esp32_temp_sensor
 	url = https://github.com/jumbobumbo/esp32_temp_sensor.git
+[submodule "web_graph"]
+	path = web_graph
+	url = https://github.com/jumbobumbo/web_graph.git
