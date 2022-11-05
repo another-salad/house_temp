@@ -10,3 +10,9 @@
 [submodule "web_graph"]
 	path = web_graph
 	url = https://github.com/jumbobumbo/web_graph.git
+[submodule "bme680sensor"]
+	path = bme680sensor
+	url = https://github.com/dwheelz/bme680sensor.git
+[submodule "pico.PCT2075"]
+	path = pico.PCT2075
+	url = https://github.com/dwheelz/pico.PCT2075.git
